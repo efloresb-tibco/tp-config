@@ -1,7 +1,7 @@
 # tp-config
 This is temporary repository to configure your "bring your own" BYO elastic search instance.
 
-All config files for ElasticSearch are supposed to submit under [elastic](https://github.com/efloresb-tibco/tp-config/raw/main/elastic) folder.
+All config files for ElasticSearch should be submitted under [elastic](https://github.com/efloresb-tibco/tp-config/raw/main/elastic) folder.
 
 ## Create Index Lifecycle Policy
 This will allow us to keep only 60 days of logs.
