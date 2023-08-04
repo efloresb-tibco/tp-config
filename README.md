@@ -28,6 +28,9 @@ curl --location --request PUT "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTI
 ```bash
 curl --location --request GET "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_ilm/policy/dp-config-es-user-index-60d-lifecycle-policy" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" | jq
 ```
+<p align="center">
+  <img src ="images/index_lifecycle.png" />
+</p>
 ### 5. Clean up.
 ```bash
 curl --location --request DELETE "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_ilm/policy/dp-config-es-user-index-60d-lifecycle-policy" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD"
@@ -58,6 +61,9 @@ curl --location --request PUT "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTI
 ```bash
 curl --location --request GET "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_index_template/dp-config-es" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" | jq
 ```
+<p align="center">
+  <img src ="images/index_template.png" />
+</p>
 ### 5. Clean up.
 ```bash
 curl --location --request DELETE "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_index_template/dp-config-es" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD"
