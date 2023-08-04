@@ -8,8 +8,7 @@ This will allow us to keep only 60 days of logs.
 
 1. Star by exporting this env vars
 ```bash
-export TP_CONFIG_ELASTIC_HOST=${TP_CONFIG_ELASTIC_HOST:-"localhost"};
-export TP_CONFIG_ELASTIC_PORT=${TP_CONFIG_ELASTIC_PORT:-"9200"};
+export TP_CONFIG_ELASTIC_HOST=${TP_CONFIG_ELASTIC_HOST:-"localhost:9200"};
 export TP_CONFIG_ELASTIC_USERNAME=${TP_CONFIG_ELASTIC_USERNAME:-"elastic"};
 export TP_CONFIG_ELASTIC_PASSWORD=${TP_CONFIG_ELASTIC_PASSWORD:-"XXXXX"};
 ```
@@ -21,12 +20,12 @@ curl -LJO 'https://github.com/efloresb-tibco/tp-config/raw/main/elastic/index-tp
 
 3. Create the Index Lifecycle Policy via API call.
 ```bash
-curl --location --request PUT "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_ilm/policy/dp-config-es-user-index-60d-lifecycle-policy" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" -H 'Content-Type: application/json' --data "@index-tp-lifecycle.json"
+curl --location --request PUT "https://$TP_CONFIG_ELASTIC_HOST/_ilm/policy/dp-config-es-user-index-60d-lifecycle-policy" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" -H 'Content-Type: application/json' --data "@index-tp-lifecycle.json"
 ```
 
 4. Valitade that the Index Lifecycle Policy has been created.
 ```bash
-curl --location --request GET "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_ilm/policy/dp-config-es-user-index-60d-lifecycle-policy" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" | jq
+curl --location --request GET "https://$TP_CONFIG_ELASTIC_HOST/_ilm/policy/dp-config-es-user-index-60d-lifecycle-policy" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" | jq
 ```
 <p align="center">
   <img src ="images/index_lifecycle.png" />
@@ -34,7 +33,7 @@ curl --location --request GET "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTI
 
 5. Clean up.
 ```bash
-curl --location --request DELETE "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_ilm/policy/dp-config-es-user-index-60d-lifecycle-policy" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD"
+curl --location --request DELETE "https://$TP_CONFIG_ELASTIC_HOST/_ilm/policy/dp-config-es-user-index-60d-lifecycle-policy" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD"
 ```
 
 ## Create Index Template
@@ -55,12 +54,12 @@ curl -LJO 'https://github.com/efloresb-tibco/tp-config/raw/main/elastic/index-tp
 
 3. Create the Index Template via API call.
 ```bash
-curl --location --request PUT "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_index_template/dp-config-es" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" -H 'Content-Type: application/json' --data "@index-tp-bwce-apps.json"
+curl --location --request PUT "https://$TP_CONFIG_ELASTIC_HOST/_index_template/dp-config-es" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" -H 'Content-Type: application/json' --data "@index-tp-bwce-apps.json"
 ```
 
 4. Valitade that the Index Template has been created.
 ```bash
-curl --location --request GET "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_index_template/dp-config-es" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" | jq
+curl --location --request GET "https://$TP_CONFIG_ELASTIC_HOST/_index_template/dp-config-es" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD" | jq
 ```
 <p align="center">
   <img src ="images/index_template.png" />
@@ -68,4 +67,5 @@ curl --location --request GET "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTI
 
 5. Clean up.
 ```bash
-curl --location --request DELETE "https://$TP_CONFIG_ELASTIC_HOST:$TP_CONFIG_ELASTIC_PORT/_index_template/dp-config-es" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD"
+curl --location --request DELETE "https://$TP_CONFIG_ELASTIC_HOST/_index_template/dp-config-es" -u "$TP_CONFIG_ELASTIC_USERNAME:$TP_CONFIG_ELASTIC_PASSWORD"
+```
